@@ -1,0 +1,2 @@
+1+ vue实例挂载点，不能是body或html
+2+ 单vue组件，<template>必需，而且只能有一个根节点<div>；<script>只能有一个，<style>可以有多个
