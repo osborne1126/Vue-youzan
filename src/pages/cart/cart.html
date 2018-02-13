@@ -55,8 +55,10 @@
                 <ul class="js-list block block-list block-list-cart border-0">
                   <li class="block-item block-item-cart" 
                     :class="{editing:shop.editing}"
+                    :ref="'goods-'+shopIndex+'-'+goodIndex"
                     v-for="(good,goodIndex) in shop.goodsList"
-
+                    @touchstart="start($event,good)"
+                    @touchend="end($event,shopIndex,good,goodIndex)"     
                   >
                     <div>
                       <div class="check-container" @click="selectGood(shop,good)">
@@ -198,6 +200,7 @@
               <button href="javascript:;" :disabled="!removeLists.length" 
                 class="j-delete-goods btn font-size-14 btn-red" 
                 v-show="editingShop"
+                @click="removeList"
               >
                 删除
               </button>
