@@ -50,7 +50,7 @@ new Vue({
             set(newVal) {
                 if(this.editingShop) {
                     this.editingShop.removeChecked = newVal
-                    this.editingShop.goodsLists.forEach(good => {
+                    this.editingShop.goodsList.forEach(good => {
                         good.removeChecked = newVal
                     })
                 }
@@ -178,12 +178,15 @@ new Vue({
            fetch(url.cartRemove,{
               id: good.id
           }).then(res => {
+        //Cart.cartRemove(good.id).then(res=>{
+            //console.log(res)
               shop.goodsList.splice(goodIndex, 1)
-              if(!shop.goodsList.length) {
-                  this.lists.splice(shopIndex, 1)
+              if(!shop.goodsList.length) {   
+                  this.lists.splice(shopIndex, 1)   
                   this.removeShop()
               }
               this.removePopup = false
+             // this.$refs[`goods-${shopIndex}-${goodIndex}`][0].style.left = '0px'
           })
         }else {
             let ids = []
@@ -193,6 +196,7 @@ new Vue({
             axios.post(url.cartMremove, {
                 ids
             }).then(res => {
+            //Cart.cartMremove(ids).then(res=>{
                 let arr = []
                 this.editingShop.goodsList.forEach(good => {
                     let index = this.removeLists.findIndex(item => {
@@ -204,13 +208,13 @@ new Vue({
                 })
                 if(arr.length){
                     this.editingShop.goodsList = arr
-                }else{
-                    this.lists.splice(this.editingIndex, 1) 
+                } else {
+                    this.lists.splice(this.editingShopIndex, 1) 
                     this.removeShop()
                 }
                 this.removePopup = false
             })
-        }
+        }      
       },
       removeShop() {
           this.editingShop = null
@@ -220,6 +224,19 @@ new Vue({
               shop.editingMsg = '编辑'
           })
       },
+
+/*
+      updata(good,e){
+        if(good.number<1||(/[^\d]/g.test(good.number))){
+            good.number = 1
+        }
+        Cart.updata(good.id,good.number).then(res=>{
+            console.log(res.statusText);
+            
+        })
+    },
+*/
+
       start(e,good) {
         good.startX = e.changedTouches[0].clientX
       },
@@ -228,11 +245,12 @@ new Vue({
         let left = '0'
         //console.log(endX, good.startX)
         if(good.startX - endX > 100) {
-            left = `-60px`
+            left = '-60px'
         }
         if(endX - good.startX > 100) {
-            left = `0px`
+            left = '0px'
         }
+        //console.log(this.$refs[`goods-${shopIndex}-${goodIndex}`])
         Volecity(this.$refs[`goods-${shopIndex}-${goodIndex}`], {
             left
         })   
