@@ -16,12 +16,12 @@ class Cart {
         })
     }
 
- /*   static remove(arr) {
+    static remove(arr) {
         let ids =[]
         arr.forEach(good => {
             ids.push(good.id)
         })
-    } */
+    } 
 }
 
 export default Cart
