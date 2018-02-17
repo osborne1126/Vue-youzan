@@ -4,7 +4,7 @@
       <a class="block-item js-address-item address-item " 
         v-for="list in lists"
         :key="list.id"
-        @click="toEdit"
+        @click="toEdit(list)"
         :class="{'address-item-default':list.isDefault}"
       >
         <div class="address-title">{{list.name}} {{list.tel}}</div>
@@ -25,7 +25,9 @@
     </div>
 
     <div class="block stick-bottom-row center">
-      <router-link class="btn btn-blue js-no-webview-block js-add-address-btn" to="/address/form">
+      <router-link class="btn btn-blue js-no-webview-block js-add-address-btn" 
+        :to="{name: 'form', query:{type: 'add'}}"
+      >
             新增地址
       </router-link>
     </div>
@@ -47,8 +49,12 @@
           })
       },
       methods: {
-          toEdit() {
-              this.$router.push({path: '/address/form'})
+          toEdit(list) {
+              //this.$router.push({path: '/address/form'})
+              this.$router.push({name: 'form', query: {
+                  type: 'edit',
+                  instance: list
+              }})
           }
       }
   }
