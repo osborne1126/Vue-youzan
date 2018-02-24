@@ -1,4 +1,5 @@
 import Address from 'js/addressService.js'
+import { mapState } from 'vuex'
 
 export default {
     data() {
@@ -17,10 +18,19 @@ export default {
             districtList: null
         }
     },
+    //第 1 种写法
+    //computed: {
+    //    lists() {
+    //        return this.$store.state.lists
+    //    }
+    //},
+    //第 2 种写法
+    //computed: mapState['lists'],
+    //第 3 种写法
     computed: {
-        lists() {
-            return this.$store.state.lists
-        }
+        ...mapState({
+            lists: state => state.lists
+        })
     },
     created() {
         let query = this.$route.query
