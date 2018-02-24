@@ -52,7 +52,9 @@
         //  Address.list().then(res => {
         //      this.lists = res.data.lists
         //  })
+          if(!this.lists) {
           this.$store.dispatch('getLists')
+          }
       },
       methods: {
           toEdit(list) {
