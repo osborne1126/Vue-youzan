@@ -1,4 +1,4 @@
-
+import './member.css'
 
 // 1.使用vue-router
 import Vue from 'vue'

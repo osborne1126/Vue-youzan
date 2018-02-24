@@ -14,6 +14,7 @@
 
 <script>
 import qs from 'qs'
+import bus from 'js/bus.js'
 
 let {index} = qs.parse(location.search.substr(1))
 
@@ -36,11 +37,20 @@ let navConfig = [{
 }]
 
 export default {
+  props: ['obj'],
   data() {
     return {
       navConfig,
-      curIndex: parseInt(index) || 0
+      curIndex: parseInt(index) || 0,
+      ob: JSON.parse(JSON.stringify(this.obj))
     }
+  },
+  created() {
+    setTimeout(() => {
+      this.ob.age = 18
+      //this.$emit('change', 18)
+      bus.$emit('change' ,18)
+    }, 5000)
   },
   methods: {
     changeNav(list,index) {

@@ -12,6 +12,8 @@ Vue.use(InfiniteScroll);
 import Foot from 'components/Foot.vue'
 import Swipe from 'components/Swipe.vue'
 
+import bus from 'js/bus.js'
+
 let app = new Vue({
     el: '#app',
     data: {
@@ -20,13 +22,24 @@ let app = new Vue({
         pageSize: 6,
         loading: false,     //false 可以继续加载
         allLoaded: false,
-        bannerLists: null
+        bannerLists: null,
+        obj: {
+            age:20
+        }
     },
     created() { 
         this.getLists()
         this.getBanner()
+        bus.$on('change',(age)=>{
+            console.log(age)
+            this.obj.age = age
+        })
     },
     methods: {
+        /*changeAge(age) {
+            console.log(age)
+            this.obj.age = age
+        }, */
         getLists() {
             if (this.allLoaded) return
             //是否在加载中
