@@ -1,3 +1,4 @@
+import address from 'js/address.json'
 import Address from 'js/addressService.js'
 import { mapState } from 'vuex'
 
@@ -11,11 +12,15 @@ export default {
             districtValue: -1,
             address: '',
             id: '',
-            type: '',
+            //isDefault: false,
             instance: '',
+            //type: this.$route.query.type,
             addressData: require('js/address.json'),
             cityList: null,
-            districtList: null
+            districtList: null,
+            //instance: this.$route.query.instance,
+            //isInitVal: false
+            // instance: JSON.parse(sessionStorage.getItem('instance'))
         }
     },
     //第 1 种写法
@@ -41,10 +46,12 @@ export default {
             // 注释: ad = address
             let ad = this.instance
             this.provinceValue = parseInt(ad.provinceValue)
+            //this.isInitVal = true
             this.name = ad.name
             this.tel = ad.tel
             this.addres = ad.address
             this.id = ad.id
+            //this.isDefault = ad.isDefault
         }
     },
     methods: {
@@ -67,10 +74,11 @@ export default {
             }
         },
         remove() {
-            if(window.confirm('确认删除吗？ ')) {
+            if(window.confirm(' 确认删除吗？ ')) {
                 //Address.remove(this.id).then(res => {
                 //    this.$router.go(-1)
                 //})
+                //console.log(this.id)
                 this.$store.dispatch('removeAction', this.id)
             }
         },
@@ -78,7 +86,7 @@ export default {
             //Address.setDefault(this.id).then(res => {
             //    this.$router.go(-1)
             //})
-            this.$store.dispatch('setDefaultAction', this.id)
+            this.$store.dispatch('setDefaultAction', this.id)   
         }
     },
     watch: {
@@ -98,7 +106,7 @@ export default {
             this.cityValue = -1
             this.districtValue = -1
 
-            if(this.type === 'edit') {
+            if(this.type === 'edit' && this.isInitVal) {
                 this.cityValue = parseInt(this.instance.cityValue)
             }
         },
@@ -110,8 +118,9 @@ export default {
             })
             this.districtList = list[index].children
             this.districtValue = -1
-            if(this.type === 'edit') {
+            if(this.type === 'edit' && this.isInitVal) {
                 this.districtValue = parseInt(this.instance.districtValue)
+                this.isInitVal = false
             }
         }
     }

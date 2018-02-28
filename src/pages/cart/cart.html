@@ -68,7 +68,7 @@
                       </div>
                       <div class="name-card clearfix">
                         <!-- :href="'goods.html?id='+good.id" -->
-                        <a  :href="'goods.html?id='+good.id"
+                        <a  :href="'goods.html?id'+good.id"
                          class="thumb js-goods-link">
                           <img  class="js-lazy" :src="good.image">
                           <!---->
@@ -202,7 +202,7 @@
               <button href="javascript:;" :disabled="!removeLists.length" 
                 class="j-delete-goods btn font-size-14 btn-red" 
                 v-show="editingShop"
-                @click="removeLists"
+                @click="removeList"
               >
                 删除
               </button>

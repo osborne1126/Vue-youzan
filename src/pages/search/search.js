@@ -15,7 +15,7 @@ new Vue({
     data: {
         searchList: null,
         keyword,
-        isShow: true       //false
+        isShow: true      //false
     },
     created() {
         this.getSearchList()

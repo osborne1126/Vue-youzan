@@ -7,7 +7,7 @@ import axios from 'axios'
 import url from '../../modules/js/api.js'
 
 import { InfiniteScroll } from 'mint-ui'
-Vue.use(InfiniteScroll);
+Vue.use(InfiniteScroll)
 
 import Foot from 'components/Foot.vue'
 import Swipe from 'components/Swipe.vue'
