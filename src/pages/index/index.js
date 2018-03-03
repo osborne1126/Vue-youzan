@@ -31,7 +31,7 @@ let app = new Vue({
         this.getLists()
         this.getBanner()
         bus.$on('change',(age)=>{
-            console.log(age)
+            //console.log(age)
             this.obj.age = age
         })
     },
